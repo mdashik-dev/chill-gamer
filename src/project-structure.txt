@@ -1,0 +1,59 @@
+chill-gamer/
+├── public/
+│   ├── index.html         # Root HTML file
+│   ├── favicon.ico        # Favicon for the app
+│   └── assets/            # Static assets (images, icons, etc.)
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── Banner/        # Banner/Slider
+│   │   │   └── Banner.jsx
+│   │   ├── Navbar/        # Navbar component
+│   │   │   └── Navbar.jsx
+│   │   ├── Footer/        # Footer component
+│   │   │   └── Footer.jsx
+│   │   ├── Spinner/       # Loading spinner
+│   │   │   └── Spinner.jsx
+│   │   └── WatchList/     # Watchlist component
+│   │       └── WatchList.jsx
+│   ├── context/           # Context API for global state management
+│   │   └── AuthContext.jsx
+│   ├── hooks/             # Custom hooks
+│   │   └── useAuth.js     # Authentication-related hook
+│   ├── layouts/           # Page layouts
+│   │   ├── MainLayout.jsx
+│   │   └── ProtectedLayout.jsx
+│   ├── pages/             # Page components
+│   │   ├── Home/          # Home page components
+│   │   │   └── Home.jsx
+│   │   ├── Reviews/       # Reviews-related pages
+│   │   │   ├── AllReviews.jsx
+│   │   │   ├── AddReview.jsx
+│   │   │   ├── ReviewDetails.jsx
+│   │   │   └── MyReviews.jsx
+│   │   ├── Auth/          # Authentication pages
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
+│   │   ├── Watchlist/     # Watchlist page
+│   │   │   └── MyWatchlist.jsx
+│   │   └── NotFound.jsx   # 404 page
+│   ├── routes/            # App routing
+│   │   └── AppRoutes.jsx  # All routes defined here
+│   ├── services/          # Firebase services
+│   │   ├── firebase.config.js
+│   │   └── dbService.js   # Database interactions
+│   ├── styles/            # Tailwind and custom CSS
+│   │   ├── index.css      # Tailwind base setup
+│   │   ├── tailwind.config.js
+│   │   └── daisyui.config.js (optional DaisyUI-specific customization)
+│   ├── utils/             # Helper functions
+│   │   ├── validateForm.js # Validation logic for forms
+│   │   └── toastHelper.js # Helper for showing toast notifications
+│   ├── App.jsx            # Main App component
+│   ├── index.js           # Entry point of the app
+│   └── firebase.json      # Firebase hosting configuration
+├── .env                   # Environment variables (Firebase keys, etc.)
+├── package.json           # NPM dependencies and scripts
+├── postcss.config.js      # PostCSS configuration for Tailwind
+├── tailwind.config.js     # Tailwind configuration
+├── README.md              # Project documentation
+└── yarn.lock/package-lock.json

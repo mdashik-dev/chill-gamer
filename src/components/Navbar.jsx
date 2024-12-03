@@ -57,17 +57,15 @@ const Navbar = () => {
             </>
           )}
           {user?.uid ? (
-            <Link to="/my-profile">
+            <div
+              className="tooltip tooltip-left"
+              data-tip={user?.displayName}
+            >
               <img
-                alt={
-                  user?.displayName
-                    ? user?.displayName
-                    : user?.email.slice(0, 2)
-                }
                 className="w-9 rounded-full mt-3 lg:mt-0"
                 src={user?.photoURL}
               />
-            </Link>
+            </div>
           ) : (
             <li>
               <Link to="/login">Login</Link>

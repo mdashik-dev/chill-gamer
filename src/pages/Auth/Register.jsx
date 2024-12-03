@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaEye, FaGoogle } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
@@ -17,7 +16,7 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { registerUserWithEmailAndPass, loginWithGoogle } =
+  const { registerUserWithEmailAndPass, loginWithGoogle, user } =
     useContext(AuthContext);
 
   const validatePassword = (password) => {
@@ -50,7 +49,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (passwordError) {
-      toast.error("Please fix the password error before submitting.");
+      Swal.fire(
+        "Error",
+        "Please fix the password error before submitting.",
+        "error"
+      );
       return;
     }
 
@@ -61,7 +64,6 @@ const Register = () => {
         formData.name,
         formData.photoURL
       );
-      toast.success("Account created successfully!");
       e.target.reset();
       setFormData({
         name: "",
@@ -69,21 +71,34 @@ const Register = () => {
         photoURL: "",
         password: "",
       });
-    } catch (error) {
-      toast.error(error.message || "Registration failed. Please try again.");
-    }
+    } catch (error) {}
   };
 
   const handleGoogleRegister = async () => {
     try {
       await loginWithGoogle();
-      toast.success("Successfully registered with Google!");
+      Swal.fire("Success", "Successfully registered with Google!", "success");
     } catch (error) {
-      toast.error(
-        error.message || "Google registration failed. Please try again."
+      Swal.fire(
+        "Error",
+        error.message || "Google registration failed. Please try again.",
+        "error"
       );
     }
   };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (user?.uid) {
+      if (location?.state?.to) {
+        navigate(location.state.to);
+      } else {
+        navigate("/");
+      }
+    }
+  }, [user]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -198,8 +213,6 @@ const Register = () => {
           </Link>
         </p>
       </div>
-
-      <ToastContainer position="bottom-center" autoClose={3000} />
     </div>
   );
 };

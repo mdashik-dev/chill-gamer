@@ -63,7 +63,6 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>
       {!loading ? children : <div>Loading...</div>}{" "}
-      {/* Loading spinner or placeholder */}
     </AuthContext.Provider>
   );
 };

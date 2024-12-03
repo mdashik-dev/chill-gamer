@@ -99,7 +99,7 @@ const Login = () => {
           </div>
 
           <div className="mt-6">
-            <button type="submit" className="btn btn-primary w-full">
+            <button type="submit" className="btn bg-green-500 hover:bg-green-600 text-white w-full">
               Login
             </button>
           </div>

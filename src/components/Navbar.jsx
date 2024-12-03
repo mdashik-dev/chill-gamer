@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut();
+    Swal.fire({
+      title: "Logged Out!",
+      text: "Successfully logged out",
+      icon: "success",
+    });
+  };
   return (
     <div className="navbar bg-white shadow-lg">
       <div className="flex-1">
@@ -37,45 +49,31 @@ const Navbar = () => {
           <li>
             <Link to="/myWatchlist">WATCHLIST</Link>
           </li>
+          {user?.uid && (
+            <>
+              <li onClick={handleLogOut}>
+                <a>Logout</a>
+              </li>
+            </>
+          )}
+          {user?.uid ? (
+            <Link to="/my-profile">
+              <img
+                alt={
+                  user?.displayName
+                    ? user?.displayName
+                    : user?.email.slice(0, 2)
+                }
+                className="w-9 rounded-full mt-3 lg:mt-0"
+                src={user?.photoURL}
+              />
+            </Link>
+          ) : (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
         </ul>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <button className="btn btn-ghost btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 11V9a4 4 0 0111.09-1.68M17 11v2m0 6a9 9 0 01-9 9 9 9 0 110-18 9 9 0 019 9z"
-            />
-          </svg>
-        </button>
-
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-8 rounded-full">
-              <img src="https://via.placeholder.com/50" alt="User Avatar" />
-            </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/logout">Logout</Link>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   );

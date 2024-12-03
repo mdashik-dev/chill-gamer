@@ -16,7 +16,6 @@ const Navbar = () => {
           />
           <span>CHILL GAMER</span>
         </Link>
-        <h1>Hello world</h1>
       </div>
 
       <div className="flex-none">

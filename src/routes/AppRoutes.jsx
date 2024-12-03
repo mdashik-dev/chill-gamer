@@ -14,6 +14,7 @@ import MyReviews from "../pages/Reviews/MyReviews";
 import ReviewDetails from "../pages/Reviews/ReviewDetails";
 import MyWatchlist from "../pages/Watchlist/MyWatchlist";
 import NotFound from "../pages/NotFound";
+import Home from "../pages/Home/Home";
 
 function AppRouter({ children }) {
   const ProtectedRoute = ({ children }) => {
@@ -27,6 +28,10 @@ function AppRouter({ children }) {
       element: <MainLayout />,
       errorElement: <Error />,
       children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
         {
           path: "/reviews",
           element: <AllReviews />,

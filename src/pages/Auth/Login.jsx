@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
@@ -24,7 +24,7 @@ const Login = () => {
         navigate("/");
       }
     }
-  }, [user]);
+  }, [user, navigate, location?.state?.to]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,18 +38,36 @@ const Login = () => {
     e.preventDefault();
     try {
       await loginWithEmailAndPass(formData.email, formData.password);
+      Swal.fire("Success", "You have logged in successfully!", "success");
       e.target.reset();
       setFormData({
         email: "",
         password: "",
       });
-    } catch (error) {}
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        error.message || "Login failed. Please try again.",
+        "error"
+      );
+    }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-    } catch (error) {}
+      Swal.fire(
+        "Success",
+        "You have logged in with Google successfully!",
+        "success"
+      );
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        error.message || "Google login failed. Please try again.",
+        "error"
+      );
+    }
   };
 
   return (
@@ -99,7 +117,10 @@ const Login = () => {
           </div>
 
           <div className="mt-6">
-            <button type="submit" className="btn bg-green-500 hover:bg-green-600 text-white w-full">
+            <button
+              type="submit"
+              className="btn bg-green-500 hover:bg-green-600 text-white w-full"
+            >
               Login
             </button>
           </div>

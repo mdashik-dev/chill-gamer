@@ -4,9 +4,9 @@ const TrendingGames = () => {
   const trendingGames = [
     {
       id: 1,
-      title: "Cyberpunk 2077",
+      title: "Dragon's Dogma 2",
       coverImage:
-        "https://www.cyberpunk.net/build/images/pre-order/buy-b/keyart-ue-en@2x-cd66fd0d.jpg",
+        "https://cdn.wccftech.com/wp-content/uploads/2024/01/dragons-dogma-2-capcom-showcase-HD-scaled.jpg",
       genre: "RPG",
       players: "1M+ Players",
     },

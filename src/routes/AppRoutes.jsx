@@ -45,7 +45,7 @@ function AppRouter({ children }) {
           element: <Register />,
         },
         {
-          path: "/addReview",
+          path: "/add-review",
           element: (
             <ProtectedRoute>
               <AddReview />

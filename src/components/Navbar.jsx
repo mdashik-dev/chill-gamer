@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
 
   const handleLogOut = () => {
     logOut();
@@ -33,21 +34,52 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1 text-black font-medium space-x-6">
           <li>
-            <Link to="/" className="text-orange-500">
+            <Link
+              className={`${location.pathname === "/" && "bg-green-500 text-white"}`}
+              to="/"
+            >
               HOME
             </Link>
           </li>
           <li>
-            <Link to="/reviews">ALL REVIEWS</Link>
+            <Link
+              className={`${
+                location.pathname === "/reviews" && "bg-green-500 text-white"
+              }`}
+              to="/reviews"
+            >
+              ALL REVIEWS
+            </Link>
           </li>
           <li>
-            <Link to="/addReview">ADD REVIEW</Link>
+            <Link
+              className={`${
+                location.pathname === "/add-review" && "bg-green-500 text-white"
+              }`}
+              to="/add-review"
+            >
+              ADD REVIEW
+            </Link>
           </li>
           <li>
-            <Link to="/myReviews">MY REVIEWS</Link>
+            <Link
+              className={`${
+                location.pathname === "/my-reviews" && "bg-green-500 text-white"
+              }`}
+              to="/my-reviews"
+            >
+              MY REVIEWS
+            </Link>
           </li>
           <li>
-            <Link to="/myWatchlist">WATCHLIST</Link>
+            <Link
+              className={`${
+                location.pathname === "/my-watchlist" && "bg-green-500 text-white"
+              }`}
+              to="/my-watchlist"
+            >
+              WATCHLIST
+            </Link>
           </li>
           {user?.uid && (
             <>
@@ -57,10 +89,7 @@ const Navbar = () => {
             </>
           )}
           {user?.uid ? (
-            <div
-              className="tooltip tooltip-left"
-              data-tip={user?.displayName}
-            >
+            <div className="tooltip tooltip-left" data-tip={user?.displayName}>
               <img
                 className="w-9 rounded-full mt-3 lg:mt-0"
                 src={user?.photoURL}
@@ -68,7 +97,12 @@ const Navbar = () => {
             </div>
           ) : (
             <li>
-              <Link to="/login">Login</Link>
+              <Link
+                className={`${location.pathname === "/" && "bg-green-500 text-white"}`}
+                to="/login"
+              >
+                Login
+              </Link>
             </li>
           )}
         </ul>

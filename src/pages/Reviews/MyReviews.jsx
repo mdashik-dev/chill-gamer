@@ -30,16 +30,25 @@ const MyReviews = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:8000/reviews/${id}`, {
+          fetch(`http://localhost:3000/reviews/${id}`, {
             method: "DELETE",
-          });
-
-          if (response.ok) {
-            setReviews((prev) => prev.filter((review) => review._id !== id));
-            Swal.fire("Deleted!", "Your review has been deleted.", "success");
-          } else {
-            Swal.fire("Error!", "Failed to delete the review.", "error");
-          }
+          })
+            .then((res) => res.json())
+            .then((response) => {
+              if (response?.deletedCount === 1) {
+                setReviews((prev) =>
+                  prev.filter((review) => review._id !== id)
+                );
+                Swal.fire(
+                  "Deleted!",
+                  "Your review has been deleted.",
+                  "success"
+                );
+              }
+            })
+            .catch(() => {
+              Swal.fire("Error!", "Failed to delete the review.", "error");
+            });
         } catch (error) {
           console.error("Error deleting review:", error);
         }
@@ -107,7 +116,11 @@ const MyReviews = () => {
       )}
 
       {selectedReview && (
-        <UpdateModal review={selectedReview} reviews={reviews} setReviews={setReviews} />
+        <UpdateModal
+          review={selectedReview}
+          reviews={reviews}
+          setReviews={setReviews}
+        />
       )}
     </div>
   );

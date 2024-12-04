@@ -22,6 +22,8 @@ const AddReview = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // console.log(import.meta.env.MONGODBURI);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,35 +37,38 @@ const AddReview = () => {
     }
 
     try {
-      const response = await fetch("", {
+      fetch(`http://localhost:3000/add-review`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "Review Added",
-          text: "Your review has been successfully added.",
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result?.acknowledged) {
+            Swal.fire({
+              icon: "success",
+              title: "Review Added",
+              text: "Your review has been successfully added.",
+            });
+            setFormData({
+              gameCover: "",
+              title: "",
+              description: "",
+              rating: "",
+              year: "",
+              genre: "",
+              email: user?.email,
+              name: user?.displayName,
+            });
+          }
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Submission Failed",
+            text: "Failed to add review. Please try again.",
+          });
         });
-        setFormData({
-          gameCover: "",
-          title: "",
-          description: "",
-          rating: "",
-          year: "",
-          genre: "",
-          email: user?.email || "",
-          name: user?.displayName || "",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Submission Failed",
-          text: "Failed to add review. Please try again.",
-        });
-      }
     } catch (error) {
       Swal.fire({
         icon: "error",

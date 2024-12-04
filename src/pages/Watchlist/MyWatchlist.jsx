@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
+import { useLoaderData } from "react-router-dom";
 
 const MyWatchlist = () => {
   const { user } = useContext(AuthContext);
   const [watchlist, setWatchlist] = useState([]);
+  const loaderData = useLoaderData();
 
   useEffect(() => {
-    if (user?.uid) {
-      fetchWatchlistData(user?.uid);
+    const data = JSON.parse(loaderData);
+    if (data?.length > 0) {
+      setWatchlist(data);
     }
-  }, [user]);
-
-  const fetchWatchlistData = (userId) => {
-
-    // setWatchlist();
-  };
+  }, [loaderData]);
 
   const handleDelete = (gameId) => {
     Swal.fire({
@@ -28,11 +26,8 @@ const MyWatchlist = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-
-        
         const updatedWatchlist = watchlist.filter((game) => game.id !== gameId);
         setWatchlist(updatedWatchlist);
-
 
         Swal.fire(
           "Removed!",
@@ -43,32 +38,10 @@ const MyWatchlist = () => {
     });
   };
 
-  const fakeData = [
-    {
-      "id": "game1",
-      "title": "Game Title 1",
-      "coverImage": "https://example.com/cover1.jpg",
-      "addedOn": "2024-12-01T12:34:56Z"
-    },
-    {
-      "id": "game2",
-      "title": "Game Title 2",
-      "coverImage": "https://example.com/cover2.jpg",
-      "addedOn": "2024-12-02T14:23:45Z"
-    },
-    {
-      "id": "game3",
-      "title": "Game Title 3",
-      "coverImage": "https://example.com/cover3.jpg",
-      "addedOn": "2024-12-03T16:45:10Z"
-    }
-  ]
-  
-
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">Your Watchlist</h2>
-      {fakeData.length === 0 ? (
+      {watchlist?.length === 0 ? (
         <p className="text-gray-500">
           Your watchlist is empty. Add games from the review details page.
         </p>
@@ -83,13 +56,13 @@ const MyWatchlist = () => {
             </tr>
           </thead>
           <tbody>
-            {fakeData.map((game) => (
+            {watchlist?.map((game) => (
               <tr key={game.id}>
                 <td>
                   <img
                     src={game.coverImage}
                     alt={game.title}
-                    className="w-16 h-16 object-cover"
+                    className="w-16 h-16 object-cover rounded-xl"
                   />
                 </td>
                 <td>{game.title}</td>

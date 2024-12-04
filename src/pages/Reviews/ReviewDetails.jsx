@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 import LoadingSkeleton from "../../components/LoadingSkeleton";
+import { useLoaderData } from "react-router-dom";
 
 const ReviewDetails = () => {
   const { user } = useContext(AuthContext);
-  const { id } = useParams();
-  // const [review, setReview] = useState(null);
+  const [review, setReview] = useState(null);
+
+  const loaderData = useLoaderData();
 
   useEffect(() => {
-    fetchReviewDetails(id);
-  }, [id]);
+    const data = JSON.parse(loaderData);
 
-  const fetchReviewDetails = async (id) => {};
+    if (data?.length > 0) {
+      setReview(data[0]);
+    }
+  }, []);
 
   const handleAddToWatchlist = async () => {
     if (!user) {
@@ -26,21 +29,32 @@ const ReviewDetails = () => {
     }
 
     const watchlistData = {
-      gameId: review?.id,
+      gameId: review?._id,
       title: review?.title,
-      coverImage: review?.coverImage,
+      coverImage: review?.gameCover,
       genre: review?.genre,
       rating: review?.rating,
       addedBy: user.email,
       username: user.displayName,
+      addedOn: new Date(),
     };
 
     try {
-      Swal.fire(
-        "Added!",
-        "The game has been added to your watchlist.",
-        "success"
-      );
+      fetch(`http://localhost:3000/add-watchlist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(watchlistData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.acknowledged) {
+            Swal.fire(
+              "Added!",
+              "The game has been added to your watchlist.",
+              "success"
+            );
+          }
+        });
     } catch (error) {
       Swal.fire(
         "Error",
@@ -48,20 +62,6 @@ const ReviewDetails = () => {
         "error"
       );
     }
-  };
-
-  const review = {
-    _id: "1",
-    gameCover:
-      "https://www.zelda.com/breath-of-the-wild/assets/icons/BOTW-Share_icon.jpg",
-    title: "Epic Quest",
-    reviewDescription:
-      "A thrilling RPG with breathtaking visuals and an engaging storyline.",
-    rating: 9.5,
-    year: 2023,
-    genre: "RPG",
-    userEmail: "testuser1@example.com",
-    userName: "Test User 1",
   };
 
   if (!review) {
@@ -87,16 +87,16 @@ const ReviewDetails = () => {
 
           <div className="mb-4">
             <p>
-              <strong>Rating:</strong> {review?.rating}/5
+              <strong>Rating:</strong> {review?.rating}/10
             </p>
             <p>
               <strong>Genre:</strong> {review?.genre}
             </p>
             <p>
-              <strong>Reviewer:</strong> {review?.reviewerName}
+              <strong>Reviewer:</strong> {review?.name}
             </p>
             <p>
-              <strong>Email:</strong> {review?.reviewerEmail}
+              <strong>Email:</strong> {review?.email}
             </p>
           </div>
 

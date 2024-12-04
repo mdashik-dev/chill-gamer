@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 const AllReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await fetch("");
-        const data = await response.json();
-        setReviews(data);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const loaderData = useLoaderData();
 
-    fetchReviews();
-  }, []);
+  useEffect(() => {
+    console.log();
+    const data = JSON.parse(loaderData);
+
+    if (data?.length > 0) {
+      setLoading(false);
+      setReviews(data);
+    }
+  }, [loaderData]);
 
   const fakeReviews = [
     {
@@ -108,7 +105,7 @@ const AllReviews = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">All Reviews</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {fakeReviews.map((review) => (
+        {reviews?.map((review) => (
           <div
             key={review._id}
             className="card bg-base-200 shadow-md rounded-md overflow-hidden"

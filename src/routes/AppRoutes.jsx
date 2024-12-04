@@ -17,8 +17,8 @@ import NotFound from "../pages/NotFound";
 import Home from "../pages/Home/Home";
 
 function AppRouter({ children }) {
+  const { user } = useAuth();
   const ProtectedRoute = ({ children }) => {
-    const { user } = useAuth();
     return user ? children : <Navigate to="/login" replace />;
   };
 
@@ -35,6 +35,9 @@ function AppRouter({ children }) {
         {
           path: "/reviews",
           element: <AllReviews />,
+          loader() {
+            return fetch("http://localhost:3000/reviews");
+          },
         },
         {
           path: "/login",
@@ -59,6 +62,9 @@ function AppRouter({ children }) {
               <MyReviews />
             </ProtectedRoute>
           ),
+          loader() {
+            return fetch(`http://localhost:3000/reviews/${user?.email}`);
+          },
         },
         {
           path: "/review/:id",
@@ -67,6 +73,9 @@ function AppRouter({ children }) {
               <ReviewDetails />
             </ProtectedRoute>
           ),
+          loader({ params }) {
+            return fetch(`http://localhost:3000/review-detail/${params.id}`);
+          },
         },
         {
           path: "/my-watchlist",
@@ -75,6 +84,9 @@ function AppRouter({ children }) {
               <MyWatchlist />
             </ProtectedRoute>
           ),
+          loader() {
+            return fetch(`http://localhost:3000/watchlist/${user?.email}`);
+          },
         },
         {
           path: "*",

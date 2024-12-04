@@ -65,7 +65,7 @@ const HighestRatedGames = () => {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:3000/reviews");
+    const response = await fetch("https://chill-gamer.vercel.app/reviews");
     const jsonData = await response.json();
     const data = JSON.parse(jsonData);
 

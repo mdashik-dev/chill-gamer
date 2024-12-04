@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { useAuth } from "../../hook/useAuth";
 
 const UpdateModal = ({ review, reviews, setReviews }) => {
   const [formData, setFormData] = useState({});
-  const { user } = useAuth();
 
   useEffect(() => {
     setFormData({
+      coverImage: review?.gameCover || "",
       title: review?.title,
       description: review?.description,
       rating: review?.rating,
@@ -23,9 +22,8 @@ const UpdateModal = ({ review, reviews, setReviews }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onUpdate(formData);
 
-    fetch(`http://localhost:3000/update-review/${review?._id}`, {
+    fetch(`https://chill-gamer.vercel.app/update-review/${review?._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -61,6 +59,20 @@ const UpdateModal = ({ review, reviews, setReviews }) => {
           </label>
           <h3 className="text-lg font-bold mb-4">Update Your Review</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Game Cover Image URL */}
+            <div>
+              <label className="label">
+                <span className="label-text">Game Cover Image URL</span>
+              </label>
+              <input
+                type="url"
+                name="coverImage"
+                value={formData.coverImage}
+                onChange={handleInputChange}
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
             <div>
               <label className="label">
                 <span className="label-text">Game Title</span>

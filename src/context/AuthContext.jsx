@@ -134,7 +134,14 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={authInfo}>
-      {!loading ? children : <div>Loading...</div>}
+      {!loading ? children : <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="relative">
+        <div className="w-16 h-16 rounded-full border-4 border-t-green-500 border-gray-300 animate-spin"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-green-500"></div>
+        </div>
+      </div>
+    </div>}
     </AuthContext.Provider>
   );
 };

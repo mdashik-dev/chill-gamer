@@ -40,7 +40,7 @@ const ReviewDetails = () => {
     };
 
     try {
-      fetch(`http://localhost:3000/add-watchlist`, {
+      fetch(`https://chill-gamer.vercel.app/add-watchlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(watchlistData),

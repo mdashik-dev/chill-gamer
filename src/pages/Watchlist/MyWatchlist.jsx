@@ -16,7 +16,7 @@ const MyWatchlist = () => {
   }, [loaderData]);
 
   const deleteWatchListItem = async () => {
-    fetch(`http://localhost:3000/watchlist/${user?.email}`, {
+    fetch(`https://chill-gamer.vercel.app/watchlist/${user?.email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -42,7 +42,7 @@ const MyWatchlist = () => {
       if (result.isConfirmed) {
         if (deleteWatchListItem()) {
           const updatedWatchlist = watchlist.filter(
-            (game) => game.id !== gameId
+            (game) => game._id !== gameId
           );
           setWatchlist(updatedWatchlist);
           Swal.fire(
@@ -86,7 +86,7 @@ const MyWatchlist = () => {
                 <td>{new Date(game.addedOn).toLocaleDateString()}</td>
                 <td>
                   <button
-                    onClick={() => handleDelete(game.id)}
+                    onClick={() => handleDelete(game._id)}
                     className="btn btn-sm btn-error text-white"
                   >
                     Remove

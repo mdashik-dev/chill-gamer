@@ -1,5 +1,6 @@
 import {
   Navigate,
+  useLocation,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -19,7 +20,13 @@ import Home from "../pages/Home/Home";
 function AppRouter({ children }) {
   const { user } = useAuth();
   const ProtectedRoute = ({ children }) => {
-    return user ? children : <Navigate to="/login" replace />;
+    const location = useLocation();
+
+    return user ? (
+      children
+    ) : (
+      <Navigate to="/login" state={{ to: location.pathname }} replace />
+    );
   };
 
   const router = createBrowserRouter([
@@ -36,7 +43,7 @@ function AppRouter({ children }) {
           path: "/reviews",
           element: <AllReviews />,
           loader() {
-            return fetch("http://localhost:3000/reviews");
+            return fetch("https://chill-gamer.vercel.app/reviews");
           },
         },
         {
@@ -63,7 +70,7 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader() {
-            return fetch(`http://localhost:3000/reviews/${user?.email}`);
+            return fetch(`https://chill-gamer.vercel.app/reviews/${user?.email}`);
           },
         },
         {
@@ -74,7 +81,7 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader({ params }) {
-            return fetch(`http://localhost:3000/review-detail/${params.id}`);
+            return fetch(`https://chill-gamer.vercel.app/review-detail/${params.id}`);
           },
         },
         {
@@ -85,14 +92,14 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader() {
-            return fetch(`http://localhost:3000/watchlist/${user?.email}`);
+            return fetch(`https://chill-gamer.vercel.app/watchlist/${user?.email}`);
           },
         },
-        {
-          path: "*",
-          element: <NotFound />,
-        },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
   return <RouterProvider router={router}>{children} </RouterProvider>;

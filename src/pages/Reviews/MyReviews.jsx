@@ -30,7 +30,7 @@ const MyReviews = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          fetch(`http://localhost:3000/reviews/${id}`, {
+          fetch(`https://chill-gamer.vercel.app/reviews/${id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())

@@ -37,7 +37,7 @@ const AddReview = () => {
     }
 
     try {
-      fetch(`http://localhost:3000/add-review`, {
+      fetch(`https://chill-gamer.vercel.app/add-review`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

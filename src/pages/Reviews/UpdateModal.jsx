@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useAuth } from "../../hook/useAuth";
 
-const UpdateModal = ({ review, onUpdate }) => {
+const UpdateModal = ({ review, reviews, setReviews }) => {
   const [formData, setFormData] = useState({});
+  const { user } = useAuth();
 
   useEffect(() => {
     setFormData({
@@ -21,12 +23,29 @@ const UpdateModal = ({ review, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(formData);
-    Swal.fire({
-      title: "Updated!",
-      text: "Review updated successfully",
-      icon: "success",
-    });
+    // onUpdate(formData);
+
+    fetch(`http://localhost:3000/update-review/${review?._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.result?.modifiedCount === 1) {
+          document.getElementById("update-modal").checked = false;
+
+          const filtered = reviews?.filter((rev) => rev._id !== review?._id);
+
+          setReviews([data?.updatedData[0], ...filtered]);
+          Swal.fire({
+            title: "Updated!",
+            text: "Review updated successfully",
+            icon: "success",
+          });
+        }
+      })
+      .catch((err) => {});
   };
 
   return (
@@ -69,7 +88,7 @@ const UpdateModal = ({ review, onUpdate }) => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Rating (1-5)</span>
+                <span className="label-text">Rating (1-10)</span>
               </label>
               <input
                 type="number"
@@ -78,7 +97,7 @@ const UpdateModal = ({ review, onUpdate }) => {
                 onChange={handleInputChange}
                 className="input input-bordered w-full"
                 min="1"
-                max="5"
+                max="10"
                 required
               />
             </div>
@@ -112,6 +131,7 @@ const UpdateModal = ({ review, onUpdate }) => {
                 <option value="Adventure">Adventure</option>
                 <option value="Puzzle">Puzzle</option>
                 <option value="Horror">Horror</option>
+                <option value="Shooter">Shooter</option>
               </select>
             </div>
             <div className="modal-action">

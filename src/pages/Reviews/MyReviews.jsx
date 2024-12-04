@@ -47,33 +47,6 @@ const MyReviews = () => {
     });
   };
 
-  const fakeReviews = [
-    {
-      _id: "1",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+1",
-      title: "Epic Quest",
-      reviewDescription:
-        "A thrilling RPG with breathtaking visuals and an engaging storyline.",
-      rating: 9.5,
-      year: 2023,
-      genre: "RPG",
-      userEmail: "testuser1@example.com",
-      userName: "Test User 1",
-    },
-    {
-      _id: "2",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+2",
-      title: "Racing Legends",
-      reviewDescription:
-        "An adrenaline-pumping racing game with stunning graphics and smooth controls.",
-      rating: 8.7,
-      year: 2022,
-      genre: "Racing",
-      userEmail: "testuser2@example.com",
-      userName: "Test User 2",
-    },
-  ];
-
   const handleUpdateClick = (review) => {
     setSelectedReview(review);
   };
@@ -134,13 +107,7 @@ const MyReviews = () => {
       )}
 
       {selectedReview && (
-        <UpdateModal
-          review={selectedReview}
-          onUpdate={(updatedReview) => {
-            onUpdate(selectedReview.id, updatedReview);
-            setSelectedReview(null);
-          }}
-        />
+        <UpdateModal review={selectedReview} reviews={reviews} setReviews={setReviews} />
       )}
     </div>
   );

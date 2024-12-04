@@ -15,6 +15,20 @@ const MyWatchlist = () => {
     }
   }, [loaderData]);
 
+  const deleteWatchListItem = async () => {
+    fetch(`http://localhost:3000/watchlist/${user?.email}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.deletedCount === 1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+  };
+
   const handleDelete = (gameId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -26,14 +40,17 @@ const MyWatchlist = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const updatedWatchlist = watchlist.filter((game) => game.id !== gameId);
-        setWatchlist(updatedWatchlist);
-
-        Swal.fire(
-          "Removed!",
-          "The game has been removed from your watchlist.",
-          "success"
-        );
+        if (deleteWatchListItem()) {
+          const updatedWatchlist = watchlist.filter(
+            (game) => game.id !== gameId
+          );
+          setWatchlist(updatedWatchlist);
+          Swal.fire(
+            "Removed!",
+            "The game has been removed from your watchlist.",
+            "success"
+          );
+        }
       }
     });
   };

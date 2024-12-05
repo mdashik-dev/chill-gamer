@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectCreative } from "swiper/modules";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { Fade } from "react-awesome-reveal";
 
 const Banner = () => {
   return (
@@ -37,11 +37,15 @@ const Banner = () => {
               className="absolute inset-0 w-full h-full object-cover opacity-50"
             />
             <div className="z-10 text-center">
-              <h2 className="text-4xl font-bold mb-4">Game of the Year</h2>
-              <p className="text-xl">
-                Explore the ultimate adventure of 2024 with incredible graphics
-                and an immersive story.
-              </p>
+              <Fade direction="down">
+                <h2 className="text-4xl font-bold mb-4">Game of the Year</h2>
+              </Fade>
+              <Fade direction="up">
+                <p className="text-xl">
+                  Explore the ultimate adventure of 2024 with incredible
+                  graphics and an immersive story.
+                </p>
+              </Fade>
             </div>
           </div>
         </SwiperSlide>
@@ -55,11 +59,17 @@ const Banner = () => {
               className="absolute inset-0 w-full h-full object-cover opacity-50"
             />
             <div className="z-10 text-center">
-              <h2 className="text-4xl font-bold mb-4">Must-Have Game Titles</h2>
-              <p className="text-xl">
-                Check out the top-rated games that everyone is talking about
-                this year.
-              </p>
+              <Fade direction="down">
+                <h2 className="text-4xl font-bold mb-4">
+                  Must-Have Game Titles
+                </h2>
+              </Fade>
+              <Fade direction="up">
+                <p className="text-xl">
+                  Check out the top-rated games that everyone is talking about
+                  this year.
+                </p>
+              </Fade>
             </div>
           </div>
         </SwiperSlide>
@@ -73,13 +83,17 @@ const Banner = () => {
               className="absolute inset-0 w-full h-full object-cover opacity-50"
             />
             <div className="z-10 text-center">
-              <h2 className="text-4xl font-bold mb-4">
-                Epic Multiplayer Experience
-              </h2>
-              <p className="text-xl">
-                Gather your friends for an unforgettable multiplayer experience
-                with new features.
-              </p>
+              <Fade direction="down">
+                <h2 className="text-4xl font-bold mb-4">
+                  Epic Multiplayer Experience
+                </h2>
+              </Fade>
+              <Fade direction="up">
+                <p className="text-xl">
+                  Gather your friends for an unforgettable multiplayer
+                  experience with new features.
+                </p>
+              </Fade>
             </div>
           </div>
         </SwiperSlide>

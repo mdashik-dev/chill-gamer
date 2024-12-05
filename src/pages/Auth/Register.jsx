@@ -101,16 +101,20 @@ const Register = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md p-8 space-y-6 shadow-sm bg-white rounded-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="w-full max-w-md p-8 space-y-6 shadow-sm bg-white dark:bg-gray-800 rounded-lg">
         <Helmet>
           <title>Register || Discount Pro</title>
         </Helmet>
-        <h2 className="text-2xl font-bold text-center">Create Your Account</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
+          Create Your Account
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Name</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Name
+              </span>
             </label>
             <input
               type="text"
@@ -118,14 +122,16 @@ const Register = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-900"
               required
             />
           </div>
 
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text">Email Address</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Email Address
+              </span>
             </label>
             <input
               type="email"
@@ -133,14 +139,16 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-900"
               required
             />
           </div>
 
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text">Photo URL</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Photo URL
+              </span>
             </label>
             <input
               type="url"
@@ -148,13 +156,15 @@ const Register = () => {
               value={formData.photoURL}
               onChange={handleChange}
               placeholder="Enter your photo URL"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-900"
             />
           </div>
 
           <div className="form-control mt-4 relative">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Password
+              </span>
             </label>
             <input
               type={showPassword ? "text" : "password"}
@@ -162,7 +172,7 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className={`input input-bordered w-full ${
+              className={`input input-bordered w-full bg-gray-100 dark:bg-gray-900 ${
                 passwordError ? "border-red-500" : ""
               }`}
               required
@@ -173,9 +183,9 @@ const Register = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <IoEyeOffSharp className="text-2xl mt-8" />
+                <IoEyeOffSharp className="text-2xl mt-8 text-gray-900 dark:text-white" />
               ) : (
-                <FaEye className="text-2xl mt-8" />
+                <FaEye className="text-2xl mt-8 text-gray-900 dark:text-white" />
               )}
             </button>
           </div>
@@ -195,20 +205,21 @@ const Register = () => {
           </div>
         </form>
 
-        <div className="divider">OR</div>
+        <div className="divider text-gray-900 dark:text-white">OR</div>
 
         <div className="flex flex-col space-y-2">
           <button
             onClick={handleGoogleRegister}
             className="btn btn-outline w-full"
           >
-            <FaGoogle className="mr-24" /> Continue with Google
+            <FaGoogle className="mr-24 text-gray-900 dark:text-white" />{" "}
+            Continue with Google
           </button>
         </div>
 
-        <p className="text-center text-sm mt-4">
+        <p className="text-center text-sm mt-4 text-gray-900 dark:text-white">
           Already have an account?{" "}
-          <Link to="/login" className="link link-primary">
+          <Link to="/login" className="link text-green-500">
             Login here
           </Link>
         </p>

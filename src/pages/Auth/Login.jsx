@@ -71,18 +71,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md p-8 space-y-6 shadow-sm bg-white rounded-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="w-full max-w-md p-8 space-y-6 shadow-sm bg-white dark:bg-gray-800 rounded-lg">
         <Helmet>
           <title>Login || Discount Pro</title>
         </Helmet>
-        <h2 className="text-2xl font-bold text-center">
+        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
           Login to Your Account
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email Address</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Email Address
+              </span>
             </label>
             <input
               type="email"
@@ -90,14 +92,16 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-900"
               required
             />
           </div>
 
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text text-gray-900 dark:text-white">
+                Password
+              </span>
             </label>
             <input
               type="password"
@@ -105,7 +109,7 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-900"
               required
             />
           </div>
@@ -137,9 +141,9 @@ const Login = () => {
           </button>
         </div>
 
-        <p className="text-center text-sm mt-4">
+        <p className="text-center text-sm mt-4 text-gray-900 dark:text-white">
           Don’t have an account?{" "}
-          <Link to="/register" className="link link-primary">
+          <Link to="/register" className="link text-green-600">
             Sign up here
           </Link>
         </p>

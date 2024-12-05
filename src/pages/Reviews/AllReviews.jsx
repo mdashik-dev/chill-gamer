@@ -4,7 +4,9 @@ import { useLoaderData } from "react-router-dom";
 
 const AllReviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedGenre, setSelectedGenre] = useState("All");
 
   const loaderData = useLoaderData();
 
@@ -14,82 +16,47 @@ const AllReviews = () => {
     if (data?.length > 0) {
       setLoading(false);
       setReviews(data);
+      setFilteredReviews(data);
     }
   }, [loaderData]);
 
-  const fakeReviews = [
-    {
-      _id: "1",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+1",
-      title: "Epic Quest",
-      reviewDescription:
-        "A thrilling RPG with breathtaking visuals and an engaging storyline.",
-      rating: 9.5,
-      year: 2023,
-      genre: "RPG",
-      userEmail: "testuser1@example.com",
-      userName: "Test User 1",
-    },
-    {
-      _id: "2",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+2",
-      title: "Racing Legends",
-      reviewDescription:
-        "An adrenaline-pumping racing game with stunning graphics and smooth controls.",
-      rating: 8.7,
-      year: 2022,
-      genre: "Racing",
-      userEmail: "testuser2@example.com",
-      userName: "Test User 2",
-    },
-    {
-      _id: "3",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+3",
-      title: "Zombie Survival",
-      reviewDescription:
-        "A survival horror game that keeps you on the edge of your seat.",
-      rating: 8.9,
-      year: 2021,
-      genre: "Horror",
-      userEmail: "testuser3@example.com",
-      userName: "Test User 3",
-    },
-    {
-      _id: "4",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+4",
-      title: "Fantasy Realms",
-      reviewDescription:
-        "An open-world fantasy game with captivating lore and immersive gameplay.",
-      rating: 9.8,
-      year: 2024,
-      genre: "Fantasy",
-      userEmail: "testuser4@example.com",
-      userName: "Test User 4",
-    },
-    {
-      _id: "5",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+5",
-      title: "Battle Royale X",
-      reviewDescription:
-        "An action-packed battle royale experience with a diverse arsenal of weapons.",
-      rating: 8.5,
-      year: 2023,
-      genre: "Action",
-      userEmail: "testuser5@example.com",
-      userName: "Test User 5",
-    },
-    {
-      _id: "6",
-      gameCover: "https://via.placeholder.com/300x400?text=Game+Cover+6",
-      title: "Adventure Island",
-      reviewDescription:
-        "A heartwarming adventure game with charming characters and puzzles.",
-      rating: 9.2,
-      year: 2020,
-      genre: "Adventure",
-      userEmail: "testuser6@example.com",
-      userName: "Test User 6",
-    },
+  const handleSort = (option) => {
+    let sortedReviews = [...filteredReviews];
+
+    if (option === "rating-asc") {
+      sortedReviews.sort((a, b) => a.rating - b.rating);
+    } else if (option === "rating-desc") {
+      sortedReviews.sort((a, b) => b.rating - a.rating);
+    } else if (option === "year-asc") {
+      sortedReviews.sort((a, b) => a.year - b.year);
+    } else if (option === "year-desc") {
+      sortedReviews.sort((a, b) => b.year - a.year);
+    }
+
+    setFilteredReviews(sortedReviews);
+  };
+
+  const handleGenreFilter = (genre) => {
+    setSelectedGenre(genre);
+
+    if (genre === "All") {
+      setFilteredReviews(reviews);
+    } else {
+      const filtered = reviews.filter((review) => review.genre === genre);
+      setFilteredReviews(filtered);
+    }
+  };
+
+  const genres = [
+    "All",
+    "RPG",
+    "Racing",
+    "Horror",
+    "Fantasy",
+    "Action",
+    "Adventure",
+    "Shooter",
+    "Puzzle",
   ];
 
   if (loading) {
@@ -103,11 +70,63 @@ const AllReviews = () => {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">All Reviews</h1>
+
+      <div className="flex justify-between items-center mb-4">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn bg-green-500 text-white m-1">
+            {selectedGenre ? selectedGenre : "Filter by Genre"}
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 shadow bg-gray-200 dark:bg-gray-700 rounded-box w-52 z-30"
+          >
+            {genres.map((genre) => (
+              <li key={genre}>
+                <button onClick={() => handleGenreFilter(genre)}>
+                  {genre}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn bg-green-500 text-white m-1">
+            Sort By
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 shadow bg-gray-200 dark:bg-gray-700 rounded-box w-52 z-30"
+          >
+            <li>
+              <button onClick={() => handleSort("rating-asc")}>
+                Rating (Low to High)
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleSort("rating-desc")}>
+                Rating (High to Low)
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleSort("year-asc")}>
+                Year (Oldest First)
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleSort("year-desc")}>
+                Year (Newest First)
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {reviews?.map((review) => (
+        {filteredReviews?.map((review) => (
           <div
             key={review._id}
-            className="card bg-base-20 dark:bg-gray-800 shadow-md rounded-md overflow-hidden"
+            className="card bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden"
           >
             <figure className="h-48 overflow-hidden">
               <img
@@ -119,13 +138,13 @@ const AllReviews = () => {
 
             <div className="card-body p-4">
               <h2 className="card-title text-lg font-bold">{review.title}</h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 <strong>Rating:</strong> {review.rating}/10
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 <strong>Genre:</strong> {review.genre}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 <strong>Year:</strong> {review.year}
               </p>
             </div>

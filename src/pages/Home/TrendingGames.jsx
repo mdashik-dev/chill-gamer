@@ -1,4 +1,4 @@
-import React from "react";
+import { Typewriter } from "react-simple-typewriter";
 
 const TrendingGames = () => {
   const trendingGames = [
@@ -31,7 +31,20 @@ const TrendingGames = () => {
   return (
     <section className="container mx-auto my-12 px-4">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
-        Trending Games
+        <Typewriter
+          words={[
+            "Trending Games",
+            "Trending Games",
+            "Trending Games",
+            "Trending Games",
+          ]}
+          loop={5}
+          cursor
+          cursorStyle="_"
+          typeSpeed={150}
+          deleteSpeed={150}
+          delaySpeed={1000}
+        />
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {trendingGames.map((game, idx) => (

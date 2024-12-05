@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 
 const HighestRatedGames = () => {
   const [games, setgames] = useState([]);
@@ -26,7 +27,20 @@ const HighestRatedGames = () => {
     <section className="bg-gray-100 dark:bg-gray-900 py-10 transition-colors duration-300">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">
-          Highest Rated Games
+          <Typewriter
+            words={[
+              "Highest Rated Games",
+              "Highest Rated Games",
+              "Highest Rated Games",
+              "Highest Rated Games",
+            ]}
+            loop={5}
+            cursor
+            cursorStyle="_"
+            typeSpeed={150}
+            deleteSpeed={150}
+            delaySpeed={1000}
+          />
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {games?.map((game) => (

@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../../hook/useAuth";
 import UpdateModal from "./UpdateModal";
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const MyReviews = () => {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
@@ -68,6 +69,9 @@ const MyReviews = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>My Reviews || Chill Gamer</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center mb-6">My Reviews</h1>
       {loading ? (
         <div className="flex justify-center">

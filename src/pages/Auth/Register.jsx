@@ -104,7 +104,7 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-md p-8 space-y-6 shadow-sm bg-white dark:bg-gray-800 rounded-lg">
         <Helmet>
-          <title>Register || Discount Pro</title>
+          <title>Register || Chill Gamer</title>
         </Helmet>
         <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
           Create Your Account

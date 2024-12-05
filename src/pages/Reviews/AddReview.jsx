@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
+import { Helmet } from "react-helmet-async";
 
 const AddReview = () => {
   const { user } = useContext(AuthContext);
@@ -79,6 +80,9 @@ const AddReview = () => {
   return (
     <div className="w-full py-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto p-8 bg-white dark:bg-gray-800 rounded-md shadow-md transition-colors duration-300">
+        <Helmet>
+          <title>Add Review || Chill Gamer</title>
+        </Helmet>
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
           Add New Review
         </h2>

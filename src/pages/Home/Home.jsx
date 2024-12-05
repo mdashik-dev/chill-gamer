@@ -3,10 +3,14 @@ import Banner from "./Banner";
 import HighestRatedGames from "./HighestRatedGames";
 import TrendingGames from "./TrendingGames";
 import LatestReviews from "./LatestReviews";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
   return (
     <div>
+      <Helmet>
+        <title>Chill Gamer</title>
+      </Helmet>
       <Banner />
       <HighestRatedGames />
       <TrendingGames />

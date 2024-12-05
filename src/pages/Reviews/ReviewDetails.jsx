@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
-import LoadingSkeleton from "../../components/LoadingSkeleton";
 import { useLoaderData } from "react-router-dom";
 import { Fade, Slide } from "react-awesome-reveal";
 
@@ -66,7 +65,33 @@ const ReviewDetails = () => {
   };
 
   if (!review) {
-    return <LoadingSkeleton />;
+    return (
+      <div className="container mx-auto p-4">
+        <div className="animate-pulse">
+          <div className="w-1/3 h-8 bg-gray-300 dark:bg-gray-600 rounded mb-6"></div>
+
+          <div className="flex flex-col lg:flex-row">
+            <div className="w-full lg:w-1/3 mb-4 lg:mb-0">
+              <div className="w-full h-64 bg-gray-300 dark:bg-gray-600 rounded-lg"></div>
+            </div>
+
+            <div className="w-full lg:w-2/3 lg:ml-6">
+              <div className="h-6 w-3/4 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+              <div className="h-4 w-full bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+
+              <div className="space-y-2">
+                <div className="h-4 w-1/2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                <div className="h-4 w-1/2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                <div className="h-4 w-1/2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                <div className="h-4 w-1/2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+              </div>
+
+              <div className="h-12 w-full bg-green-500 dark:bg-green-600 rounded mt-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

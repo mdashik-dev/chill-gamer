@@ -30,21 +30,25 @@ const TrendingGames = () => {
 
   return (
     <section className="container mx-auto my-12 px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Trending Games</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+        Trending Games
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {trendingGames.map((game) => (
+        {trendingGames.map((game, idx) => (
           <div
-            key={game.id}
-            className="bg-gray-100 text-black rounded-lg shadow-inner p-4"
+            key={idx}
+            className="bg-gray-100 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-inner p-4 transition-colors duration-300"
           >
             <img
-              src={game.coverImage}
-              alt={game.title}
+              src={game?.coverImage}
+              alt={game?.title}
               className="rounded-lg mb-4 w-full"
             />
-            <h3 className="text-xl font-bold">{game.title}</h3>
-            <p className="text-sm text-gray-400">{game.genre}</p>
-            <p className="mt-2 font-medium">{game.players}</p>
+            <h3 className="text-xl font-bold">{game?.title}</h3>
+            <p className="text-sm text-gray-400 dark:text-gray-300">
+              {game?.genre}
+            </p>
+            <p className="mt-2 font-medium">{game?.players}</p>
           </div>
         ))}
       </div>

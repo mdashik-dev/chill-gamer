@@ -30,7 +30,6 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, [auth]);
 
-  // console.log(user)
 
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();

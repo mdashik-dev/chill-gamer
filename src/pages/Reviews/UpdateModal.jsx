@@ -59,7 +59,6 @@ const UpdateModal = ({ review, reviews, setReviews }) => {
           </label>
           <h3 className="text-lg font-bold mb-4">Update Your Review</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Game Cover Image URL */}
             <div>
               <label className="label">
                 <span className="label-text">Game Cover Image URL</span>

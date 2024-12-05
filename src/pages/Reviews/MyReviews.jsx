@@ -75,7 +75,7 @@ const MyReviews = () => {
         </div>
       ) : reviews?.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table w-full bg-white">
+          <table className="table w-full bg-white dark:bg-gray-800">
             <thead>
               <tr>
                 <th>SN</th>

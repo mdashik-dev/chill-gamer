@@ -22,8 +22,6 @@ const AddReview = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // console.log(import.meta.env.MONGODBURI);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,64 +77,70 @@ const AddReview = () => {
   };
 
   return (
-    <div className="w-full bg-base-200 py-8">
-      <div className="max-w-4xl mx-auto p-8 bg-white rounded-md shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Add New Review</h2>
+    <div className="w-full py-8 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto p-8 bg-white dark:bg-gray-800 rounded-md shadow-md transition-colors duration-300">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
+          Add New Review
+        </h2>
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {/* Game Cover */}
           <div className="form-control">
-            <label className="label font-medium">Game Cover Image URL</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Game Cover Image URL
+            </label>
             <input
               type="url"
               name="gameCover"
               value={formData.gameCover}
               onChange={handleChange}
-              className="input input-bordered"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               placeholder="Enter game cover image URL"
               required
             />
           </div>
 
-          {/* Game Title */}
           <div className="form-control">
-            <label className="label font-medium">Game Title</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Game Title
+            </label>
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="input input-bordered"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               placeholder="Enter game title"
               required
             />
           </div>
 
-          {/* Review Description */}
           <div className="form-control md:col-span-2">
-            <label className="label font-medium">Review Description</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Review Description
+            </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="textarea textarea-bordered"
+              className="textarea textarea-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               rows="4"
               placeholder="Write your review here"
               required
             />
           </div>
 
-          {/* Rating */}
           <div className="form-control">
-            <label className="label font-medium">Rating</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Rating
+            </label>
             <input
               type="number"
               name="rating"
               value={formData.rating}
               onChange={handleChange}
-              className="input input-bordered"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               min="1"
               max="10"
               placeholder="Enter rating (1-10)"
@@ -144,28 +148,30 @@ const AddReview = () => {
             />
           </div>
 
-          {/* Publishing Year */}
           <div className="form-control">
-            <label className="label font-medium">Publishing Year</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Publishing Year
+            </label>
             <input
               type="number"
               name="year"
               value={formData.year}
               onChange={handleChange}
-              className="input input-bordered"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               placeholder="Enter publishing year"
               required
             />
           </div>
 
-          {/* Genre */}
           <div className="form-control">
-            <label className="label font-medium">Genre</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              Genre
+            </label>
             <select
               name="genre"
               value={formData.genre}
               onChange={handleChange}
-              className="select select-bordered"
+              className="select select-bordered bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
               required
             >
               <option value="" disabled>
@@ -179,35 +185,36 @@ const AddReview = () => {
             </select>
           </div>
 
-          {/* User Name */}
           <div className="form-control">
-            <label className="label font-medium">User Name</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              User Name
+            </label>
             <input
               type="text"
               name="name"
               value={formData.name}
               readOnly
-              className="input input-bordered bg-gray-200 cursor-not-allowed"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 cursor-not-allowed text-gray-800 dark:text-gray-100"
             />
           </div>
 
-          {/* User Email */}
           <div className="form-control md:col-span-2">
-            <label className="label font-medium">User Email</label>
+            <label className="label font-medium text-gray-800 dark:text-gray-300">
+              User Email
+            </label>
             <input
               type="email"
               name="email"
               value={formData.email}
               readOnly
-              className="input input-bordered bg-gray-200 cursor-not-allowed"
+              className="input input-bordered bg-gray-200 dark:bg-gray-700 cursor-not-allowed text-gray-800 dark:text-gray-100"
             />
           </div>
 
-          {/* Submit Button */}
           <div className="md:col-span-2 text-center">
             <button
               type="submit"
-              className="btn bg-green-500 text-white w-full"
+              className="btn bg-green-500 dark:bg-green-600 text-white w-full hover:bg-green-600 dark:hover:bg-green-700 transition-colors duration-300"
             >
               Submit Review
             </button>

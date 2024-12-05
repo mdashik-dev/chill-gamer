@@ -9,7 +9,6 @@ const AllReviews = () => {
   const loaderData = useLoaderData();
 
   useEffect(() => {
-    console.log();
     const data = JSON.parse(loaderData);
 
     if (data?.length > 0) {
@@ -108,7 +107,7 @@ const AllReviews = () => {
         {reviews?.map((review) => (
           <div
             key={review._id}
-            className="card bg-base-200 shadow-md rounded-md overflow-hidden"
+            className="card bg-base-20 dark:bg-gray-800 shadow-md rounded-md overflow-hidden"
           >
             <figure className="h-48 overflow-hidden">
               <img
@@ -134,7 +133,7 @@ const AllReviews = () => {
             <div className="card-actions justify-center p-4">
               <Link
                 to={`/review/${review._id}`}
-                className="btn bg-green-500 text-white"
+                className="w-full py-2 text-center rounded-lg bg-green-500 text-white"
               >
                 Explore Details
               </Link>

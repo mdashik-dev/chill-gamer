@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
@@ -10,13 +10,21 @@ import {
   FaHeart,
   FaSignOutAlt,
   FaUser,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const handleLogOut = () => {
     logOut();
@@ -28,21 +36,19 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-white shadow-lg">
-      {/* Logo Section */}
+    <div className="navbar bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300 sticky top-0 z-40">
       <div className="flex-1">
         <Link
           to="/"
-          className="btn btn-ghost normal-case text-xl text-green-600 font-bold flex items-center space-x-2"
+          className="btn btn-ghost normal-case text-xl text-green-600 dark:text-green-400 font-bold flex items-center space-x-2"
         >
           <FaGamepad className="h-6 w-6" />
           <span>CHILL GAMER</span>
         </Link>
       </div>
 
-      {/* Desktop Navigation */}
       <div className="hidden lg:flex flex-none">
-        <ul className="menu menu-horizontal px-1 text-black font-medium space-x-6">
+        <ul className="menu menu-horizontal px-1 text-black dark:text-white font-medium space-x-6">
           <li>
             <Link
               className={`${
@@ -131,7 +137,13 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Mobile Menu */}
+      <button
+        onClick={toggleTheme}
+        className="p-4 text-green-600 dark:text-green-400 text-xl"
+      >
+        {theme === "light" ? <FaMoon /> : <FaSun />}
+      </button>
+
       <div className="lg:hidden flex-none z-50">
         <div className="dropdown dropdown-end">
           <label
@@ -143,7 +155,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className={`menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52 ${
+            className={`menu menu-compact dropdown-content mt-3 p-2 shadow bg-white dark:bg-gray-800 rounded-box w-52 ${
               isMenuOpen ? "block" : "hidden"
             }`}
           >

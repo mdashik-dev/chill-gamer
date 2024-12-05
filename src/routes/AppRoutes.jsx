@@ -43,7 +43,7 @@ function AppRouter({ children }) {
           path: "/reviews",
           element: <AllReviews />,
           loader() {
-            return fetch("https://chill-gamer.vercel.app/reviews");
+            return fetch(`${import.meta.env.VITE_API_PORT}/reviews`);
           },
         },
         {
@@ -70,7 +70,9 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader() {
-            return fetch(`https://chill-gamer.vercel.app/reviews/${user?.email}`);
+            return fetch(
+              `${import.meta.env.VITE_API_PORT}/reviews/${user?.email}`
+            );
           },
         },
         {
@@ -81,7 +83,9 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader({ params }) {
-            return fetch(`https://chill-gamer.vercel.app/review-detail/${params.id}`);
+            return fetch(
+              `${import.meta.env.VITE_API_PORT}/review-detail/${params.id}`
+            );
           },
         },
         {
@@ -92,7 +96,9 @@ function AppRouter({ children }) {
             </ProtectedRoute>
           ),
           loader() {
-            return fetch(`https://chill-gamer.vercel.app/watchlist/${user?.email}`);
+            return fetch(
+              `${import.meta.env.VITE_API_PORT}/watchlist/${user?.email}`
+            );
           },
         },
       ],

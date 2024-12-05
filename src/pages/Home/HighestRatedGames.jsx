@@ -66,9 +66,9 @@ const HighestRatedGames = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games?.map((game) => (
+            {games?.map((game, idx) => (
               <div
-                key={game?.id}
+                key={idx}
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="h-48 w-full bg-gray-200 dark:bg-gray-700">

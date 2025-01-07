@@ -28,22 +28,15 @@ const HighestRatedGames = () => {
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-10 transition-colors duration-300">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">
-          <Typewriter
-            words={[
-              "Highest Rated Games",
-              "Highest Rated Games",
-              "Highest Rated Games",
-              "Highest Rated Games",
-            ]}
-            loop={5}
-            cursor
-            cursorStyle="_"
-            typeSpeed={150}
-            deleteSpeed={150}
-            delaySpeed={1000}
-          />
-        </h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
+            Highest Rated Games
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg mt-2">
+            Discover the top-rated games based on user reviews. Find your next
+            favorite game today!
+          </p>
+        </div>
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -65,7 +58,7 @@ const HighestRatedGames = () => {
               ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {games?.map((game, idx) => (
               <div
                 key={idx}

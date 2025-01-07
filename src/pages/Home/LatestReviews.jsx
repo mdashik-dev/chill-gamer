@@ -1,5 +1,3 @@
-import { Typewriter } from "react-simple-typewriter";
-
 const LatestReviews = () => {
   const reviews = [
     {
@@ -31,20 +29,7 @@ const LatestReviews = () => {
   return (
     <section className="container mx-auto my-12 px-4 dark:bg-gray-900">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
-        <Typewriter
-          words={[
-            "Latest Reviews",
-            "Latest Reviews",
-            "Latest Reviews",
-            "Latest Reviews",
-          ]}
-          loop={5}
-          cursor
-          cursorStyle="_"
-          typeSpeed={150}
-          deleteSpeed={150}
-          delaySpeed={1000}
-        />
+        Latest Reviews
       </h2>
       <div className="space-y-6">
         {reviews.map((review) => (

@@ -16,6 +16,10 @@ import ReviewDetails from "../pages/Reviews/ReviewDetails";
 import MyWatchlist from "../pages/Watchlist/MyWatchlist";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/Home/Home";
+import OfferPage from "../pages/OfferPage/OfferPage";
+import AboutUs from "../pages/About/About";
+import ContactUs from "../pages/ContactUs";
+import Support from "../pages/Support";
 
 function AppRouter({ children }) {
   const { user } = useAuth();
@@ -40,6 +44,18 @@ function AppRouter({ children }) {
           element: <Home />,
         },
         {
+          path: "/about-us",
+          element: <AboutUs />,
+        },
+        {
+          path: "/contact-us",
+          element: <ContactUs />,
+        },
+        {
+          path: "/support",
+          element: <Support />,
+        },
+        {
           path: "/reviews",
           element: <AllReviews />,
           loader() {
@@ -49,6 +65,10 @@ function AppRouter({ children }) {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/offer/:slug",
+          element: <OfferPage />,
         },
         {
           path: "/register",
@@ -77,11 +97,7 @@ function AppRouter({ children }) {
         },
         {
           path: "/review/:id",
-          element: (
-            <ProtectedRoute>
-              <ReviewDetails />
-            </ProtectedRoute>
-          ),
+          element: <ReviewDetails />,
           loader({ params }) {
             return fetch(
               `${import.meta.env.VITE_API_PORT}/review-detail/${params.id}`

@@ -1,4 +1,3 @@
-import { Typewriter } from "react-simple-typewriter";
 
 const TrendingGames = () => {
   const trendingGames = [
@@ -30,22 +29,15 @@ const TrendingGames = () => {
 
   return (
     <section className="container mx-auto my-12 px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
-        <Typewriter
-          words={[
-            "Trending Games",
-            "Trending Games",
-            "Trending Games",
-            "Trending Games",
-          ]}
-          loop={5}
-          cursor
-          cursorStyle="_"
-          typeSpeed={150}
-          deleteSpeed={150}
-          delaySpeed={1000}
-        />
-      </h2>
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          Trending Games
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg mt-2">
+          Check out the hottest games everyone's talking about. Play, compete,
+          and explore the latest trends in gaming!
+        </p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {trendingGames.map((game, idx) => (
           <div

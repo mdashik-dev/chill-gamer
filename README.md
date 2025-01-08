@@ -31,7 +31,6 @@ Welcome to **Chill Gamer**, your ultimate hub for game reviews, watchlists, and 
 - **Backend**: Node.js, Express.js  
 - **Database**: MongoDB  
 - **Hosting**: Vercel  
-- 
 ---
 
 ### Packages Used
